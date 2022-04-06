@@ -1,0 +1,18 @@
+
+server:
+  port: 9000
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  datasource:
+    url: "jdbc:mysql://207.180.226.46:3306/tapcard_test?useSSL=false&serverTimezone=Africa/Harare&allowPublicKeyRetrieval=true"
+    username: developer
+    password: ch@ng3itDev
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
