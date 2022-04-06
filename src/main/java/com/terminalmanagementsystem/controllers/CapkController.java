@@ -21,12 +21,17 @@ public class CapkController {
 
 
     @GetMapping("/")
-    public ResponseEntity<Response> getAllCapks(){
+    public ResponseEntity<Response> getAllCapks() {
 
         return new ResponseEntity<>(capkResponseBuild.listResponseFunction.
                 apply(capkService.getCapks()), HttpStatus.OK);
     }
 
+    @GetMapping("/bank/{bankName}")
+    public ResponseEntity<Response> getCapksByBankName(@PathVariable String bankName){
+        return new ResponseEntity<>(capkResponseBuild.listResponseFunction.
+                apply(capkService.getCapksByBankName(bankName)),HttpStatus.OK);
+}
     @GetMapping("/{id}")
     public ResponseEntity<Response>getOneCapk(@PathVariable Integer id){
 

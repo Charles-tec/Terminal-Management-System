@@ -23,9 +23,11 @@ import java.util.Objects;
 @Service
 public class AidServiceImpl implements AidService {
     private final AidRepository aidRepository;
+    private final BankRepository bankRepository;
 
     @Override
     public Aid createAid(AidDto aidDto) {
+        var bankName=bankRepository.findBankNameById(aidDto.getBankId());
         Aid aid= new Aid();
         aid.setAid(aidDto.getAid());
         aid.setVendor(aidDto.getVendor());
@@ -34,6 +36,7 @@ public class AidServiceImpl implements AidService {
         aid.setDescription(aidDto.getDescription());
         aid.setType(aidDto.getType());
         aid.setBankId(aidDto.getBankId());
+        aid.setBankName(bankName);
         aidRepository.save(aid);
 
         return  aidRepository.save(aid);
@@ -49,6 +52,7 @@ public class AidServiceImpl implements AidService {
         if (!aidRepository.existsById(id)) {
             throw new EntityNotFoundException("Aid with provided id not found");
         }
+        var bankName=bankRepository.findBankNameById(aidDto.getBankId());
         Aid aid = new Aid();
         aid.setId(aidDto.getId());
         aid.setAid(aidDto.getAid());
@@ -58,6 +62,7 @@ public class AidServiceImpl implements AidService {
         aid.setDescription(aid.getDescription());
         aid.setType(aid.getType());
         aid.setBankId(aid.getBankId());
+        aid.setBankName(bankName);
         aidRepository.save(aid);
 
         return aidRepository.save(aid);
@@ -80,4 +85,9 @@ public class AidServiceImpl implements AidService {
 
         }
 
+    @Override
+    public List<Aid> getAidsByBankName(String bankName) {
+        return aidRepository.findAllByBankName(bankName);
     }
+
+}

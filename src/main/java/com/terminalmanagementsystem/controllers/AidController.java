@@ -26,6 +26,11 @@ public class AidController {
         return new ResponseEntity<>(aidResponseBuild.listResponseFunction.
                 apply(aidService.getAids()), HttpStatus.OK);
     }
+    @GetMapping("/banks/{bankName}")
+    public ResponseEntity<Response> getAidByBankName(@PathVariable String bankName){
+        return new ResponseEntity<>(aidResponseBuild.listResponseFunction.
+                apply(aidService.getAidsByBankName(bankName)),HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Response>getOneAid(@PathVariable Integer id){

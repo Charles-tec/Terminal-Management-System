@@ -11,4 +11,7 @@ public interface AidRepository extends JpaRepository<Aid, Integer> {
     void deleteById(Integer id);
 
     List<Aid> findAll();
+
+    List<Aid> findAllByBankName(String name);
+
 }

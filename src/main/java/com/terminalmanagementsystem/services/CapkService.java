@@ -21,4 +21,6 @@ public interface CapkService {
 
     Boolean  deleteCapk(Integer id);
     List<Capk> getCapks();
+
+    List<Capk> getCapksByBankName(String bankName);
 }

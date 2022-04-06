@@ -22,4 +22,6 @@ public interface AidService {
     Boolean  deleteAid(Integer id);
 
     List<Aid> getAids();
+
+    List<Aid> getAidsByBankName(String bankName);
 }

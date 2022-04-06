@@ -3,6 +3,7 @@ package com.terminalmanagementsystem.services.impl;
 import com.terminalmanagementsystem.dtos.CapkDto;
 import com.terminalmanagementsystem.exceptions.InvalidParameterException;
 import com.terminalmanagementsystem.models.Capk;
+import com.terminalmanagementsystem.repositories.BankRepository;
 import com.terminalmanagementsystem.repositories.CapkRepository;
 import com.terminalmanagementsystem.services.CapkService;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,12 @@ import java.util.Objects;
 public class CapkServiceImpl implements CapkService {
 
     private final CapkRepository capkRepository;
+    private final BankRepository bankRepository;
 
     @Override
     public Capk createCapk(CapkDto capkDto) {
+        var bankName=bankRepository.findBankNameById(capkDto.getBankId());
+
         Capk capk = new Capk();
         capk.setIssuer(capkDto.getIssuer());
         capk.setExponent(capkDto.getExponent());
@@ -34,6 +38,7 @@ public class CapkServiceImpl implements CapkService {
         capk.setKeyLength(capk.getKeyLength());
         capk.setExpires(capkDto.getExpires());
         capk.setBankId(capkDto.getBankId());
+        capk.setBankName(bankName);
         capkRepository.save(capk);
 
 
@@ -50,6 +55,7 @@ public class CapkServiceImpl implements CapkService {
         if (!capkRepository.existsById(id)) {
             throw new EntityNotFoundException("Bank with provided id not found");
         }
+        var bankName=bankRepository.findBankNameById(capkDto.getBankId());
 
         Capk capk = new Capk();
         capk.setId(capkDto.getId());
@@ -62,6 +68,7 @@ public class CapkServiceImpl implements CapkService {
         capk.setKeyLength(capk.getKeyLength());
         capk.setExpires(capkDto.getExpires());
         capk.setBankId(capkDto.getBankId());
+        capk.setBankName(bankName);
         capkRepository.save(capk);
 
 
@@ -84,5 +91,10 @@ public class CapkServiceImpl implements CapkService {
     public List<Capk> getCapks() {
         return capkRepository.findAll();
 
+    }
+
+    @Override
+    public List<Capk> getCapksByBankName(String bankName) {
+        return capkRepository.findAllByBankName(bankName);
     }
 }

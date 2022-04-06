@@ -37,5 +37,9 @@ public class Aid {
     @Column(name = "bank_id")
     private Integer bankId;
 
+    @Column(name ="bank_name")
+    private String bankName;
+
+
 
 }
