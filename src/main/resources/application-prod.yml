@@ -9,6 +9,8 @@ spring:
     url: "jdbc:mysql://207.180.226.46:3306/tapcard_test?useSSL=false&serverTimezone=Africa/Harare&allowPublicKeyRetrieval=true"
     username: developer
     password: ch@ng3itDev
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver
   jpa:
     properties:
       hibernate:

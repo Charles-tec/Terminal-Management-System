@@ -1,10 +1,9 @@
 package com.terminalmanagementsystem.services.impl;
 
 import com.terminalmanagementsystem.dtos.AidDto;
-import com.terminalmanagementsystem.dtos.BankDto;
 import com.terminalmanagementsystem.exceptions.InvalidParameterException;
 import com.terminalmanagementsystem.models.Aid;
-import com.terminalmanagementsystem.models.Bank;
+
 import com.terminalmanagementsystem.repositories.AidRepository;
 import com.terminalmanagementsystem.repositories.BankRepository;
 import com.terminalmanagementsystem.services.AidService;
@@ -18,6 +17,9 @@ import java.util.List;
 import java.util.Objects;
 
 
+/**
+ * 
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -57,11 +59,11 @@ public class AidServiceImpl implements AidService {
         aid.setId(aidDto.getId());
         aid.setAid(aidDto.getAid());
         aid.setVendor(aidDto.getVendor());
-        aid.setCountry(aid.getCountry());
-        aid.setName(aid.getName());
-        aid.setDescription(aid.getDescription());
-        aid.setType(aid.getType());
-        aid.setBankId(aid.getBankId());
+        aid.setCountry(aidDto.getCountry());
+        aid.setName(aidDto.getName());
+        aid.setDescription(aidDto.getDescription());
+        aid.setType(aidDto.getType());
+        aid.setBankId(aidDto.getBankId());
         aid.setBankName(bankName);
         aidRepository.save(aid);
 
